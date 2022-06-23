@@ -1,14 +1,14 @@
-function FileBrowser() {
+function FileBrowser(props) {
   const handleClick = (e) => {
     // console.log(e.target.innerHTML);
     let selectedSongName = e.target.innerHTML;
-    console.log(selectedSongName);
-    alert(selectedSongName);
+    // console.log(selectedSongName);
+    // alert(selectedSongName);
+    props.changeSong(selectedSongName);
   };
 
   return (
     <div>
-      {/* <ul>{listItems}</ul> */}
       <List
         sx={{
           width: "100%",
@@ -19,6 +19,7 @@ function FileBrowser() {
           maxHeight: 300,
           "& ul": { padding: 0 },
           border: 1,
+          borderRadius: "16px",
         }}
         subheader={<li />}
       >

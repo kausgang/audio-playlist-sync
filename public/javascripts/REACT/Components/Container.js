@@ -15,36 +15,27 @@ function Container(props) {
     style.display = "none";
   }
 
-  function select_song(selected_song) {
+  const changeSong = (selectedSongName) => {
+    console.log(selectedSongName);
+
     // CHANGE SOUND SOURCE
+    let songSource = "../../AUDIO/" + selectedSongName;
     let new_sound = new Howl({
-      src: selected_song,
+      src: songSource,
       html5: true,
     });
     setSound(new_sound);
 
-    setFilename(selected_song.split("/").pop());
-
-    // CHANGE DISPLAY OF PLAYAUDIO
-    setIsHidden(false);
-  }
+    setFilename(selectedSongName);
+  };
 
   return (
     <div>
-      <div style={style}>
-        <p className="text-danger m-2">
-          Song selection is now disabled. Refresh page to change song
-        </p>
-      </div>
+      <FileBrowser changeSong={changeSong} />
 
-      <FileBrowser />
-      {/* <div className="mt-3">
-        <SelectAudio select_song={select_song} mp3_files={mp3_files} />
-      </div>
-
-      <div style={style}>
+      <div>
         <PlayAudio sound={sound} filename={filename} />
-      </div> */}
+      </div>
     </div>
   );
 }
