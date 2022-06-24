@@ -1,6 +1,6 @@
 function FileBrowser(props) {
   const handleClick = (e) => {
-    // console.log(e.target.innerHTML);
+    // console.log(e.target);
     let selectedSongName = e.target.innerHTML;
     // console.log(selectedSongName);
     // alert(selectedSongName);
@@ -11,8 +11,8 @@ function FileBrowser(props) {
     <div>
       <List
         sx={{
-          width: "100%",
-          //   maxWidth: 360,
+          width: "90%",
+          // maxWidth: 360,
           bgcolor: "background.paper",
           position: "relative",
           overflow: "auto",

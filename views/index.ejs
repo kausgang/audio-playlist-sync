@@ -42,9 +42,22 @@
     <div id="root" class="container"></div>
 
     <script>
+      let lastPlayed_html_encoded = "<%= lastPlayed %>";
+
+      // if filename contains special character, it it coming as html encoded string..this needs to be decoded first
+      var textArea = document.createElement("textarea");
+      textArea.innerHTML = lastPlayed_html_encoded;
+      let lastPlayed = textArea.value;
+
       let mp3_files_string = "<%= filenames %>";
-      let mp3_files = mp3_files_string.split(",");
-      // let mp3_files = "<%= filenames %>";
+
+      // var textArea = document.createElement("textarea");
+      textArea.innerHTML = mp3_files_string;
+      let mp3_files_string_html_decoded = textArea.value;
+
+      // let mp3_files = mp3_files_string.split(",");
+      let mp3_files = mp3_files_string_html_decoded.split(",");
+
       // console.log(mp3_files);
       // INPUT AUDIO FILES ARE STORED IN mp3_files VARIABLE
     </script>

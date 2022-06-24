@@ -1,5 +1,19 @@
 function PlaybackControl(props) {
   let sound = props.sound;
+
+  // Fires when the sound finishes playing.
+  sound.on("end", function () {
+    // when song extends,
+    // get the current song index
+    let currentSongIndex = mp3_files.indexOf(props.filename);
+    // increment index by 1
+    currentSongIndex++;
+    // get the next song source
+    let nextSongSource = mp3_files[currentSongIndex];
+    // create new sound with the next song in container function
+    props.onEnd(nextSongSource);
+  });
+
   // initialize timestamp to 0 second
   const [timestamp, setTimestamp] = React.useState(0);
   const [playing, setPlaying] = React.useState(false);
@@ -14,22 +28,6 @@ function PlaybackControl(props) {
         props.seek_progressbar(sound.seek());
       }, 1000);
     }
-
-    // if (playing) {
-    //   props.seek_progressbar(Math.round(sound.seek()));
-    // }
-
-    // // BOOKARK SEEK HAS BEEN CLICKED
-    // if (props.audio_value !== null) {
-    //   console.log("audio_value=", props.audio_value);
-    //   // GET CURRENT SEEK TIME FROM PARENT
-    //   setTimestamp(props.audio_value);
-    //   // SEEK TO TMESTAMP
-    //   sound.seek(timestamp);
-
-    //   // UPDATE THE SEEK COUNTER IN PROGRESS BAR
-    //   props.seek_progressbar(timestamp);
-    // }
   });
 
   const play = () => {

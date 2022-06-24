@@ -13,7 +13,10 @@ filenames = fs
   // .filter((el) => path.extname(el) === ".mp3");
   .filter((el) => path.extname(el) !== ".txt");
 
-console.log(filenames);
+let lastPlayed = fs.readFileSync("./public/LASTPLAYED.txt", {
+  encoding: "utf8",
+  flag: "r",
+});
 
 // if bookmark for the audio files dont exist , create them
 // filenames.forEach((element) => {
@@ -24,7 +27,19 @@ console.log(filenames);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express", filename: filenames });
+  res.render("index", {
+    title: "Express",
+    filename: filenames,
+    lastPlayed,
+  });
+});
+
+router.post("/", function (req, res, next) {
+  console.log("here");
+  let lastPlayed = req.body.filename;
+  fs.writeFileSync("./public/LASTPLAYED.txt", lastPlayed);
+
+  res.send(200);
 });
 
 module.exports = router;
