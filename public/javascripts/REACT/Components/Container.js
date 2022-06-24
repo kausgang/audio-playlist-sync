@@ -51,16 +51,46 @@ function Container(props) {
   };
 
   // NOT IMPLEMENTED AS THIS FUNCTION IS CALLED MANY TIMES FOR SOME REASON
-  const nextsong = () => {};
+  const nextsong_UNUSED = () => {};
+
+  const previousSong = () => {
+    // // get the current song index
+    let currentSongIndex = mp3_files.indexOf(filename);
+    // // increment index by 1
+    currentSongIndex--;
+    // // get the next song source
+    let nextSongSource = mp3_files[currentSongIndex];
+    changeSong(nextSongSource);
+  };
+
+  const nextSong = () => {
+    // // get the current song index
+    let currentSongIndex = mp3_files.indexOf(filename);
+    // // increment index by 1
+    currentSongIndex++;
+    // // get the next song source
+    let nextSongSource = mp3_files[currentSongIndex];
+    changeSong(nextSongSource);
+  };
 
   return (
     <div>
-      <div className="d-flex justify-content-center mt-4">
+      <div className="d-flex justify-content-center mt-2">
         <div className="d-flex flex-column">
           <div className="text-primary">
             <b>Files in ./public/AUDIO folder</b>
           </div>
           <FileBrowser changeSong={changeSong} />
+          <div className="d-flex justify-content-between">
+            {/* <div> */}
+            <button className="btn btn-outline-primary" onClick={previousSong}>
+              -1
+            </button>
+
+            <button className="btn btn-outline-primary" onClick={nextSong}>
+              +1
+            </button>
+          </div>
         </div>
       </div>
 
@@ -74,7 +104,7 @@ function Container(props) {
       </div>
 
       <div>
-        <PlayAudio sound={sound} filename={filename} onEnd={nextsong} />
+        <PlayAudio sound={sound} filename={filename} onEnd={nextsong_UNUSED} />
       </div>
     </div>
   );

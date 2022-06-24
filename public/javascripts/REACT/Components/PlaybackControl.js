@@ -2,16 +2,20 @@ function PlaybackControl(props) {
   let sound = props.sound;
 
   // Fires when the sound finishes playing.
-  sound.on("end", function () {
-    // when song extends,
-    // get the current song index
-    let currentSongIndex = mp3_files.indexOf(props.filename);
-    // increment index by 1
-    currentSongIndex++;
-    // get the next song source
-    let nextSongSource = mp3_files[currentSongIndex];
-    // create new sound with the next song in container function
-    props.onEnd(nextSongSource);
+  sound.once("end", function () {
+    // SCRAPPED THIS AS THIS IS BEING CALLED MULTIPLE TIMES FOR SOME REASON
+    // console.log("here");
+    // // when song extends,
+    // // get the current song index
+    // let currentSongIndex = mp3_files.indexOf(props.filename);
+    // // increment index by 1
+    // currentSongIndex++;
+    // // get the next song source
+    // let nextSongSource = mp3_files[currentSongIndex];
+    // // create new sound with the next song in container function
+    // setTimeout(() => {
+    //   props.onEnd(nextSongSource);
+    // }, 2000);
   });
 
   // initialize timestamp to 0 second
